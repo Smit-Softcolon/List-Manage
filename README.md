@@ -18,7 +18,7 @@ flutter test
 
 ## Application Demo
 
-![An App that display a list of items and allows the user to add new items to the list.]()
+![An App that display a list of items and allows the user to add new items to the list.](https://github.com/user-attachments/assets/702a4d68-e803-4882-9341-d546bc0baefe)
 
 ## Functionality Requirements
 Complete the app implementation to meet these requirements:
