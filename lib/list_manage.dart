@@ -6,7 +6,12 @@ final ValueNotifier<List<String>> itemsNotifier =
 final TextEditingController _controller = TextEditingController();
 
 bool addItems(String str) {
-  // Add your logic here and change the return value as your convenience
+  // Solution
+  if (str.isNotEmpty) {
+    itemsNotifier.value = List.from(itemsNotifier.value)..add(str);
+    _controller.clear();
+    return true;
+  }
   return false;
 }
 
