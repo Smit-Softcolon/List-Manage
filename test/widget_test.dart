@@ -1,30 +1,55 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:item_list_manager_task/list_manage.dart';
 import 'package:item_list_manager_task/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('ListView Task Tests', () {
+    testWidgets('Should add item to list and clear TextField',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      // Enter item to text field
+      const testText = 'Item';
+      await tester.enterText(find.byType(TextField), testText);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      // Verify text was entered
+      expect(find.text(testText), findsOneWidget);
+      print('Text entered in TextField.');
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      // Tap add button
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Add'));
+      await tester.pump();
+      print('Add Button clicked.');
+
+      // Verify item was added to list
+      expect(find.text(testText), findsOneWidget);
+      expect(itemsNotifier.value.contains(testText), isTrue);
+      expect(itemsNotifier.value.length, 1);
+      print('Item added to list.');
+
+      // Verify TextField was cleared
+      final textFieldWidget = tester.widget<TextField>(find.byType(TextField));
+      expect(textFieldWidget.controller!.text, isEmpty);
+      print('TextField cleared.');
+    });
+
+    testWidgets('Should not add empty string to list',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
+
+      // Try to add empty string
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Add'));
+      await tester.pump();
+
+      // Verify nothing was added
+      expect(itemsNotifier.value.isEmpty, isTrue);
+      print('Empty string not added to list.');
+    });
+
+    setUp(() {
+      // Reset the ValueNotifier before each test
+      itemsNotifier.value = [];
+    });
   });
 }

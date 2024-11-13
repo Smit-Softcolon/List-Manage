@@ -1,16 +1,31 @@
-# item_list_manager_task
+# Flutter: List Manage
+Create a list manage application, as shown below. Application requirements follow, and the finished application must pass all the unit tests.
 
-A new Flutter project.
+## Environment
 
-## Getting Started
+## Read-Only Files
+- `test/*`
 
-This project is a starting point for a Flutter application.
+## Commands
+- run:
+```bash
+flutter run
+```
+- test:
+```bash
+flutter test
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Application Demo
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![An App that display a list of items and allows the user to add new items to the list.]()
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Functionality Requirements
+Complete the app implementation to meet these requirements:
+- When the application loads, it should display an empty list.
+- The input field should access user text input.
+- when the button is clicked:
+    - The text from the input field should be added to the list.
+    - The input field should be cleared.
+
+Note: If input field is empty and the button is clicked, nothing should be added to the list.
